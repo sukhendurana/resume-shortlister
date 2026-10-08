@@ -1,0 +1,35 @@
+# 1. Create virtual environment
+python3 -m venv .venv
+
+# 2. Activate virtual environment
+source .venv/bin/activate
+
+# 3. Install dependencies (only pypdf is needed, for PDF resumes; Python 3.9+)
+pip3 install pypdf
+
+# 4. Run with --cv-dir set to the CV folder and --jd set to the job description file.
+#    Supported CV formats: .pdf, .docx, .txt, and .md.
+#    Set HF_TOKEN in your environment, or pass the token with --hf-token.
+#    For Hugging Face Inference Providers, the token needs the
+#    “Make calls to Inference Providers” permission. Usage may require
+#    available credits or billing.
+python3 main.py --cv-dir ./cvs --jd ./job_description.txt
+
+# Optional flags
+#   --hf-token <token>          pass the token as a parameter instead of HF_TOKEN
+#   --interactive               after ranking: reweight/add/remove requirements,
+#                               filter skills, inspect evidence
+#   --require-skills "python,sql"   shortlist only CVs mentioning all listed skills
+#   --top-k 5                   display only the best 5 CVs
+#   --workers 4                 CVs processed in parallel
+#   --output-dir ./output       where ranking.csv and ranking.json are written
+#   --api-url <url>             any OpenAI-compatible chat endpoint (default: Hugging
+#                               Face router; e.g. local Ollama)
+#   --no-cache                  disable the response cache
+#                               (<output-dir>/llm_cache.jsonl)
+#   --list-models [filter]      print chat models available to your token and exit (e.g. --list-models qwen)
+#   --extract-model Qwen/Qwen3-4B-Instruct-2507   Model A (parsing)   [default]
+#   --score-model microsoft/phi-4              Model B (matching)  [default]
+
+# Full example
+python3 main.py --cv-dir ./cvs --jd ./job_description.txt --hf-token "paste-your-token-here" --top-k 10 --interactive
