@@ -1,6 +1,6 @@
 # resume-shortlister
 
-Python application that compares resumes with a job description, scores candidates against job requirements, and reports strengths and gaps with supporting evidence.
+Python application that scores resumes against a job description and provides a SWOT-style analysis of candidate strengths and gaps, with supporting evidence.
 
 ## Requirements
 
